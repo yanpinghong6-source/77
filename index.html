@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#a5492f">
+<title>红烧肉的赣州旅游攻略 · 三天两夜不回头路线</title>
+<style>
+/* ============ 设计基调：简约高级文旅 ============ */
+:root{
+  --ink:#2b2622; --ink2:#6b6157; --paper:#f7f4ee; --card:#ffffff;
+  --brick:#a5492f; --brick-d:#8a3a24; --gold:#b08d57; --line:#e8e2d6;
+  --shadow:0 2px 12px rgba(43,38,34,.08); --r:16px;
+  --tabbar-h:64px; --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow-x:hidden}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;
+  background:var(--paper); color:var(--ink); font-size:15px; line-height:1.65;
+}
+h1,h2,h3,.serif{font-family:"Songti SC","STSong","Noto Serif SC",serif}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+img{display:block;max-width:100%}
+::-webkit-scrollbar{width:0;height:0}
+
+/* ---------- 顶栏 ---------- */
+header{
+  position:sticky;top:0;z-index:60;background:linear-gradient(135deg,#8a3a24,#a5492f);
+  color:#fff;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 12px;
+  box-shadow:0 2px 10px rgba(0,0,0,.18);
+}
+header .tt{font-size:19px;font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:8px}
+header .sub{font-size:12px;opacity:.85;margin-top:2px}
+header .wx{margin-left:auto;font-size:12px;background:rgba(255,255,255,.18);padding:5px 10px;border-radius:20px;white-space:nowrap}
+
+/* ---------- Key 配置提示条 ---------- */
+#keyBanner{display:none;background:#fdf3e7;color:#8a5a1e;font-size:13px;padding:10px 16px;border-bottom:1px solid #f0e0c8}
+#keyBanner a{color:var(--brick);font-weight:600}
+
+/* ---------- 地图区 ---------- */
+#mapWrap{position:relative;height:42vh;min-height:280px;background:#e9e4d8}
+#map{position:absolute;inset:0}
+.map-fallback{position:absolute;inset:0;overflow-y:auto;padding:20px 16px;background:var(--paper)}
+.map-fallback h3{color:var(--brick);margin-bottom:8px;font-size:17px}
+.map-fallback ol{padding-left:20px;color:var(--ink2);font-size:13px}
+#mapToolbar{position:absolute;top:10px;left:10px;right:10px;z-index:20;display:flex;gap:6px;flex-wrap:wrap}
+.layer-chip{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:20px;
+  padding:7px 12px;font-size:12.5px;color:var(--ink2);box-shadow:var(--shadow);display:flex;align-items:center;gap:5px}
+.layer-chip.on{color:#fff;background:var(--brick);border-color:var(--brick)}
+.layer-chip .dot{width:8px;height:8px;border-radius:50%}
+#expandMap{position:absolute;bottom:12px;right:12px;z-index:20;background:var(--ink);color:#fff;
+  border-radius:24px;padding:9px 16px;font-size:13px;box-shadow:var(--shadow)}
+#mapWrap.fullscreen{position:fixed;inset:0;height:auto;z-index:200}
+#mapWrap.fullscreen #expandMap{background:#fff;color:var(--ink)}
+
+/* ---------- 主内容 & 底部Tab ---------- */
+main{padding-bottom:calc(var(--tabbar-h) + var(--safe-b) + 56px)}
+.panel{display:none;padding:14px 14px 24px;animation:fade .25s}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.sec-title{font-size:17px;margin:6px 0 4px;display:flex;align-items:baseline;gap:8px}
+.sec-title small{font-size:12px;color:var(--ink2);font-family:inherit}
+.sec-desc{font-size:12.5px;color:var(--ink2);margin-bottom:12px}
+
+/* ---------- 卡片通用 ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden}
+.card .imgbox{position:relative;height:150px;background:linear-gradient(135deg,#8a3a24,#c07a5a 60%,#b08d57);
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card .imgbox .ph{color:rgba(255,255,255,.92);font-family:"Songti SC",serif;font-size:26px;letter-spacing:6px;text-align:center;padding:0 12px}
+.card .imgbox .ph small{display:block;font-size:11px;letter-spacing:2px;opacity:.75;margin-top:4px;font-family:inherit}
+.card .imgbox img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card .body{padding:12px 14px 14px}
+.card h3{font-size:16.5px;margin-bottom:4px}
+.card .meta{font-size:12.5px;color:var(--ink2)}
+.card .row{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.tag{font-size:11px;padding:3px 9px;border-radius:12px;background:#f1ece1;color:var(--ink2);border:1px solid var(--line)}
+.tag.red{background:#f9e9e3;color:var(--brick);border-color:#ecc9bb}
+.tag.gold{background:#f7efdf;color:#8a6a2f;border-color:#e8d9b8}
+.tag.green{background:#e9f2ea;color:#3f6f4a;border-color:#cfe0d2}
+.price{color:var(--brick);font-weight:700;font-size:15px}
+.fav-btn{position:absolute;top:10px;right:10px;z-index:5;width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.92);font-size:17px;box-shadow:var(--shadow)}
+.fav-btn.on{background:var(--brick);color:#fff}
+
+/* ---------- 筛选 chips ---------- */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;padding:8px 16px;border-radius:22px;background:#fff;border:1px solid var(--line);
+  font-size:13px;color:var(--ink2)}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ---------- 时间轴 ---------- */
+.day-tabs{display:flex;gap:8px;margin-bottom:12px}
+.day-tab{flex:1;padding:11px 0;text-align:center;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:14px;font-weight:600;color:var(--ink2)}
+.day-tab.on{background:var(--brick);color:#fff;border-color:var(--brick)}
+.timeline{position:relative;padding-left:22px}
+.timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.tl-item{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:12px 12px 12px 14px;margin-bottom:10px;box-shadow:var(--shadow)}
+.tl-item::before{content:"";position:absolute;left:-19px;top:18px;width:12px;height:12px;border-radius:50%;
+  background:var(--brick);border:2.5px solid var(--paper)}
+.tl-item .tm{font-size:12px;color:var(--gold);font-weight:700;letter-spacing:.5px}
+.tl-item h4{font-size:15px;margin:2px 0}
+.tl-item .tr{font-size:12px;color:var(--ink2);margin-top:6px;background:#f7f4ee;border-radius:8px;padding:6px 8px}
+.tl-item .ops{display:flex;gap:6px;margin-top:8px}
+.mini-btn{font-size:12px;padding:7px 12px;border-radius:10px;background:#f1ece1;color:var(--ink);border:1px solid var(--line)}
+.mini-btn.primary{background:var(--brick);color:#fff;border-color:var(--brick)}
+.mini-btn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.big-btn{display:block;width:100%;padding:14px;border-radius:14px;background:var(--ink);color:#fff;
+  font-size:15px;font-weight:600;margin:10px 0;letter-spacing:1px}
+.big-btn.brick{background:var(--brick)}
+.big-btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.sum-bar{display:flex;justify-content:space-between;background:#fff;border:1px dashed var(--gold);
+  border-radius:12px;padding:10px 14px;font-size:13px;color:var(--ink2);margin:6px 0}
+
+/* ---------- 工具区 ---------- */
+.field{margin-bottom:12px}
+.field label{display:block;font-size:13px;color:var(--ink2);margin-bottom:5px;font-weight:600}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:#fff;
+  font-size:15px;font-family:inherit;color:var(--ink)}
+.field textarea{min-height:76px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kv{display:flex;justify-content:space-between;font-size:13.5px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.notice{font-size:12px;color:var(--ink2);background:#f1ece1;border-radius:10px;padding:10px 12px;margin:10px 0;line-height:1.7}
+
+/* ---------- 底部工具栏 & Tabbar ---------- */
+#toolbar{position:fixed;left:0;right:0;bottom:calc(var(--tabbar-h) + var(--safe-b));z-index:80;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);
+  display:flex;padding:8px 10px;gap:8px}
+#toolbar button{flex:1;padding:10px 0;border-radius:12px;font-size:13px;font-weight:600;
+  background:#f1ece1;color:var(--ink)}
+#toolbar button.main{background:var(--brick);color:#fff}
+#tabbar{position:fixed;left:0;right:0;bottom:0;z-index:90;height:calc(var(--tabbar-h) + var(--safe-b));
+  background:rgba(255,255,255,.98);backdrop-filter:blur(10px);border-top:1px solid var(--line);
+  display:flex;padding-bottom:var(--safe-b)}
+#tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;font-size:10.5px;color:var(--ink2)}
+#tabbar button .ic{font-size:19px;line-height:1}
+#tabbar button.on{color:var(--brick);font-weight:700}
+
+/* ---------- 弹层 ---------- */
+.modal-mask{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;display:none;align-items:flex-end}
+.modal-mask.show{display:flex}
+.modal{width:100%;max-height:82vh;overflow-y:auto;background:var(--paper);border-radius:20px 20px 0 0;
+  padding:18px 18px calc(24px + var(--safe-b));animation:up .3s}
+@keyframes up{from{transform:translateY(40px);opacity:.5}to{transform:none;opacity:1}}
+.modal h3{font-size:17px;margin-bottom:10px;color:var(--brick)}
+.modal .close-x{position:absolute;top:14px;right:16px;font-size:22px;color:var(--ink2)}
+.toast{position:fixed;left:50%;bottom:calc(var(--tabbar-h) + 70px + var(--safe-b));transform:translateX(-50%);
+  background:var(--ink);color:#fff;padding:10px 20px;border-radius:24px;font-size:13.5px;z-index:400;
+  opacity:0;pointer-events:none;transition:opacity .25s;white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis}
+.toast.show{opacity:.95}
+
+/* ---------- 部署指南 ---------- */
+.deploy-steps{counter-reset:s}
+.deploy-steps li{list-style:none;position:relative;padding:10px 0 10px 40px;border-bottom:1px dashed var(--line);font-size:13.5px}
+.deploy-steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:10px;
+  width:26px;height:26px;border-radius:50%;background:var(--brick);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
+code{background:#efe9db;padding:2px 7px;border-radius:6px;font-size:12.5px;color:var(--brick-d);word-break:break-all}
+
+/* ---------- 打印 ---------- */
+@media print{
+  #tabbar,#toolbar,header,#mapWrap,.no-print{display:none!important}
+  .panel{display:block!important}
+  body{background:#fff}
+}
+
+/* ---------- 桌面端 ---------- */
+@media(min-width:1024px){
+  body{font-size:14px}
+  #app{display:grid;grid-template-columns:300px 1fr 400px;gap:14px;max-width:1500px;margin:0 auto;padding:14px}
+  #mapWrap{height:calc(100vh - 120px);min-height:520px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+  #leftCol,#rightCol{height:calc(100vh - 120px);overflow-y:auto;position:sticky;top:70px}
+  #tabbar{display:none}
+  #toolbar{position:static;border:none;background:none;padding:0 0 10px}
+  main{padding-bottom:0}
+  .panel{padding:0}
+  #rightCol .panel.on{padding:4px 2px}
+  .modal-mask{align-items:center;justify-content:center}
+  .modal{width:560px;border-radius:20px;position:relative}
+}
+</style>
+</head>
+<body>
+<div id="app">
+<!-- ===================== 左栏：参数 & 筛选 ===================== -->
+<aside id="leftCol">
+  <header>
+    <div class="tt">🏮 红烧肉的赣州旅游攻略</div>
+    <div class="sub">三天两夜 · 宋城不回头路线 · 章贡区深度版</div>
+  </header>
+  <div id="keyBanner">⚙️ 地图 Key 未配置：页面功能已全部可用，<a href="#deploy" onclick="showPanel('tools')">点这里看 30 秒配置教程</a> 点亮实时地图。</div>
+
+  <div class="panel on" id="panel-params" style="padding:14px">
+    <div class="sec-title">出行参数</div>
+    <div class="field"><label>出行日期</label><input type="date" id="pDate"></div>
+    <div class="grid2">
+      <div class="field"><label>出行天数</label>
+        <select id="pDays"><option value="2">2天1夜</option><option value="3" selected>3天2夜</option><option value="4">4天3夜</option></select></div>
+      <div class="field"><label>出行人数</label>
+        <select id="pPeople"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+    </div>
+    <div class="field"><label>人均预算（元）</label><input type="number" id="pBudget" value="1200" min="300" step="100"></div>
+    <div class="field"><label>兴趣偏好（可多选）</label>
+      <div class="chips" id="pFavs">
+        <button class="chip on" data-v="历史">🏛️ 历史古迹</button>
+        <button class="chip on" data-v="夜景">🌃 夜景夜游</button>
+        <button class="chip" data-v="美食">🍜 美食优先</button>
+        <button class="chip" data-v="汉服">🎎 汉服拍照</button>
+        <button class="chip" data-v="亲子">👨‍👩‍👧 亲子</button>
+      </div>
+    </div>
+    <button class="big-btn brick" onclick="generatePlan()">✨ 智能生成不回头行程</button>
+    <div class="notice">生成逻辑：以酒店为原点 → 按地理聚类分天 → 每天最近邻串点，保证同一片区一次走完，全程无折返。</div>
+
+    <div class="sec-title" style="margin-top:16px">天气查询 <small>Open-Meteo 实时</small></div>
+    <div id="weatherBox" class="card"><div class="body" style="font-size:13px;color:var(--ink2)">点击查询赣州实时天气 👇</div></div>
+    <button class="big-btn ghost" onclick="loadWeather()">🌤️ 查询赣州天气</button>
+
+    <div class="sec-title" style="margin-top:16px">抵达交通总览</div>
+    <div class="card"><div class="body" style="font-size:13px">
+      <div class="kv"><span>🚄 赣州西站（高铁）</span><span class="price">距老城约 13km</span></div>
+      <div class="kv"><span>🚌 公交 D2/D8 路进城</span><span>约 50 分钟 · 2元</span></div>
+      <div class="kv"><span>🚕 打车至郁孤台片区</span><span>约 35 元 · 30 分钟</span></div>
+      <div class="kv"><span>✈️ 赣州黄金机场</span><span>距市区约 16km</span></div>
+      <div class="kv"><span>🚕 机场→老城区</span><span>约 50 元 · 40 分钟</span></div>
+      <div class="kv"><span>🚂 赣州站（普速）</span><span>紧邻市区 · 公交直达</span></div>
+    </div></div>
+
+    <div class="sec-title" style="margin-top:16px">预算计算器</div>
+    <div class="card"><div class="body">
+      <div class="field"><label>住宿 / 晚（元）</label><input type="number" id="bHotel" value="280"></div>
+      <div class="grid2">
+        <div class="field"><label>餐饮 / 天（元）</label><input type="number" id="bFood" value="120"></div>
+        <div class="field"><label>门票 / 人（元）</label><input type="number" id="bTicket" value="20"></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label>市内交通 / 天</label><input type="number" id="bTrans" value="40"></div>
+        <div class="field"><label>其他 / 人</label><input type="number" id="bOther" value="100"></div>
+      </div>
+      <button class="big-btn" onclick="calcBudget()">计算总预算</button>
+      <div id="budgetOut" class="sum-bar" style="display:none"></div>
+    </div></div>
+  </div>
+</aside>
+
+<!-- ===================== 中栏：地图 ===================== -->
+<section id="mapWrap">
+  <div id="mapToolbar">
+    <button class="layer-chip on" data-layer="spot"><span class="dot" style="background:#a5492f"></span>景点</button>
+    <button class="layer-chip" data-layer="hanfu"><span class="dot" style="background:#b08d57"></span>汉服机位</button>
+    <button class="layer-chip" data-layer="food"><span class="dot" style="background:#3f6f4a"></span>美食</button>
+    <button class="layer-chip" data-layer="hotel"><span class="dot" style="background:#4a5f8a"></span>酒店</button>
+  </div>
+  <div id="map"></div>
+  <button id="expandMap" onclick="toggleFullscreen()">⛶ 全屏地图</button>
+</section>
+
+<!-- ===================== 右栏：六大 Tab ===================== -->
+<section id="rightCol">
+  <!-- 行程 -->
+  <div class="panel" id="panel-plan">
+    <div class="sec-title">每日行程时间轴 <small>地图联动 · 支持调整</small></div>
+    <div class="sec-desc">点任一时间轴卡片，地图自动定位；上下移调整顺序后点「智能重排」重新计算无折返路线。</div>
+    <div class="day-tabs" id="dayTabs"></div>
+    <div class="timeline" id="timeline"></div>
+    <div class="sum-bar" id="daySum"></div>
+    <button class="big-btn brick" onclick="reorderDay()">🧭 智能重排本日（无折返）</button>
+    <button class="big-btn ghost" onclick="exportNavLinks()">📍 一键导出当日导航链接</button>
+  </div>
+
+  <!-- 景点 -->
+  <div class="panel" id="panel-spots">
+    <div class="sec-title">必打卡景点 <small id="spotCount"></small></div>
+    <div class="sec-desc">信息为整理时参考，出行前请以「高德地图」实时页面为准。</div>
+    <div class="chips" id="spotFilters">
+      <button class="chip on" data-f="all">全部</button>
+      <button class="chip" data-f="free">免费</button>
+      <button class="chip" data-f="paid">收费</button>
+      <button class="chip" data-f="indoor">室内</button>
+      <button class="chip" data-f="night">夜游友好</button>
+      <button class="chip" data-f="rain">雨天备选</button>
+      <button class="chip" data-f="core">市区核心</button>
+      <button class="chip" data-f="far">远途周边</button>
+    </div>
+    <div id="spotList"></div>
+  </div>
+
+  <!-- 汉服 -->
+  <div class="panel" id="panel-hanfu">
+    <div class="sec-title">汉服打卡专题 <small>3 条出片路线</small></div>
+    <div class="sec-desc">黄金时段：日出后 1 小时 & 日落前 1 小时；夜景蓝调时刻 18:40-19:20 最佳。</div>
+    <div id="hanfuList"></div>
+    <div class="card"><div class="body">
+      <h3>🎎 穿搭 & 避雷贴士</h3>
+      <div class="meta" style="font-size:13px;line-height:2">
+        · 宋城红墙配<strong>米白/淡青</strong>色系最出片，避免大红撞色<br>
+        · 古城墙砖灰色，适合<strong>明制马面裙</strong>，风大时备发夹固定<br>
+        · 避开 10:30-14:30 顶光；周末 15 点后不夜城人流激增<br>
+        · 妆造建议提前 1 天预约郁孤台街区汉服体验馆（约 ¥99-199 含服装发型）<br>
+        · 浮桥木板缝隙大，穿<strong>平底绣花鞋</strong>，细高跟必卡
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 美食 -->
+  <div class="panel" id="panel-food">
+    <div class="sec-title">本地人必吃 <small>老店优先 · 过滤网红</small></div>
+    <div class="sec-desc">筛选标准：收录 5 年以上 + 评分 4.2+；价格为整理时参考。</div>
+    <div class="chips" id="foodFilters">
+      <button class="chip on" data-f="all">全部</button>
+      <button class="chip" data-f="早餐">早餐</button>
+      <button class="chip" data-f="正餐">正餐</button>
+      <button class="chip" data-f="小吃">小吃夜宵</button>
+      <button class="chip" data-f="特色">赣州特色</button>
+    </div>
+    <div id="foodList"></div>
+  </div>
+
+  <!-- 酒店 -->
+  <div class="panel" id="panel-hotel">
+    <div class="sec-title">高性价比酒店 <small id="hotelCount"></small></div>
+    <div class="sec-desc">选定酒店后自动作为行程起终点，路线随之重算。</div>
+    <div class="chips" id="hotelFilters">
+      <button class="chip on" data-f="all">全部</button>
+      <button class="chip" data-f="经济">¥150-250</button>
+      <button class="chip" data-f="舒适">¥250-400</button>
+      <button class="chip" data-f="品质">¥400+</button>
+      <button class="chip" data-f="早">含早</button>
+      <button class="chip" data-f="停">可停车</button>
+      <button class="chip" data-f="民宿">民宿</button>
+    </div>
+    <div id="hotelList"></div>
+  </div>
+
+  <!-- 工具 -->
+  <div class="panel" id="panel-tools">
+    <div class="sec-title">避坑贴士 & 行李建议</div>
+    <div class="card"><div class="body" style="font-size:13px;line-height:2">
+      <h3 style="margin-bottom:6px">⚠️ 本地避坑</h3>
+      · 宋城免费入园，<strong>夜景演出座位区</strong>收费，外围看效果一样<br>
+      · 古浮桥 17 点后渔船归岸最有味道，正午又晒又没看点<br>
+      · 赣州老馆子 13:30-17:00 大多午休，下午觅食去渔湾里小吃街<br>
+      · 的士拒载短途是陋习，直接用高德打车更稳<br>
+      · 文庙周一闭馆（节假日除外），别跑空<br>
+      · 夏季江边蚊虫多，驱蚊水必带
+      <h3 style="margin:12px 0 6px">🧳 行李建议</h3>
+      · 舒适平底鞋（古城墙+浮桥全靠走）<br>
+      · 防晒霜 + 遮阳伞 + 小风扇（5-9 月）<br>
+      · 充电宝（拍照导航耗电快）<br>
+      · 肠胃药（赣菜偏辣偏咸）
+      <h3 style="margin:12px 0 6px">🚨 应急信息</h3>
+      · 急救 120 · 报警 110 · 旅游投诉 0797-8391558<br>
+      · 赣州市第一人民医院：章贡区大公路 49 号<br>
+      · 最近的派出所：解放派出所（老城区中心）
+    </div></div>
+
+    <div class="sec-title" style="margin-top:16px">我的收藏 <small id="favCount"></small></div>
+    <div id="favList"><div class="notice">还没有收藏。在景点/美食/酒店卡片右上角点 ♡ 即可收藏。</div></div>
+
+    <div class="sec-title" style="margin-top:16px">个人备注笔记</div>
+    <div class="field"><textarea id="myNotes" placeholder="例如：Day2 晚饭订董府 18:00 四人位…"></textarea></div>
+    <button class="big-btn ghost" onclick="saveNotes()">💾 保存笔记（本地）</button>
+
+    <div id="deploy" style="margin-top:20px">
+      <div class="sec-title">🚀 部署指南 <small>3 分钟拿到公网链接</small></div>
+      <div class="card"><div class="body">
+        <ol class="deploy-steps">
+          <li>注册 GitHub 账号 <code>github.com</code> → 点 New repository 新建仓库，命名 <code>ganzhou-trip</code>，选 Public</li>
+          <li>把本文件改名为 <code>index.html</code>，在仓库页点 <code>Add file → Upload files</code> 上传</li>
+          <li>仓库页 → <code>Settings → Pages</code> → Source 选 <code>main</code> 分支 → Save</li>
+          <li>等 1-2 分钟，访问 <code>你的用户名.github.io/ganzhou-trip</code> 即完成 🎉</li>
+          <li>点亮地图：去 <code>lbs.amap.com</code> 免费申请 Web端(JS API) Key + 安全密钥，填入本文件顶部 <code>CONFIG</code> 中的两引号内，重新上传即可</li>
+        </ol>
+      </div></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- 底部工具栏 -->
+<div id="toolbar">
+  <button onclick="exportMD()">📄 导出攻略</button>
+  <button onclick="window.print()">🖨️ 存为 PDF</button>
+  <button onclick="showFavModal()">⭐ 收藏夹</button>
+  <button class="main" onclick="shareLink()">🔗 分享链接</button>
+</div>
+
+<!-- 底部 Tab 栏（移动端） -->
+<nav id="tabbar">
+  <button class="on" data-p="plan"><span class="ic">🗓️</span>行程</button>
+  <button data-p="spots"><span class="ic">🏛️</span>景点</button>
+  <button data-p="hanfu"><span class="ic">🎎</span>汉服</button>
+  <button data-p="food"><span class="ic">🍜</span>美食</button>
+  <button data-p="hotel"><span class="ic">🏨</span>酒店</button>
+  <button data-p="tools"><span class="ic">🧰</span>工具</button>
+</nav>
+
+<div class="modal-mask" id="modalMask" onclick="if(event.target===this)closeModal()">
+  <div class="modal" style="position:relative">
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==================================================================
+ * ★★★ 配置区：把申请到的两个 Key 填进下面引号内，地图即可点亮 ★★★
+ * 申请教程见页面底部「工具 → 部署指南」，免费，约 10 分钟。
+ * ================================================================== */
+const CONFIG = {
+  AMAP_KEY: "",            // ← 填入 Web端(JS API) Key，如 "a1b2c3d4..."
+  AMAP_SECURITY_CODE: "",  // ← 填入安全密钥 SecurityJsCode
+  CITY: [114.935, 25.860]  // 赣州市中心（经度,纬度）
+};
+
+/* ============ 真实点位数据库（坐标为高德可查的概略位置） ============ */
+const SPOTS = [
+ {id:"weijiadayuan",name:"魏家大院",img:"",lat:25.8595,lng:114.9375,area:"core",cat:"历史",ticket:"免费",open:"8:30-17:30（周一闭馆）",dur:"1小时",best:"9:00-11:00 人少光线柔",park:"附近老城区路侧泊位少，建议打车",tips:"赣州现存最大清代客家民居群，'九井十八厅'格局；先逛这里能对客家建筑建立整体认知，后面看文庙古寺更有感觉。",tags:["free","outdoor","rain"]},
+ {id:"shouliang",name:"寿量古寺",img:"",lat:25.8605,lng:114.9365,area:"core",cat:"历史",ticket:"免费（香火随喜）",open:"7:00-17:00",dur:"40分钟",best:"清晨或傍晚安静",park:"老城区不建议自驾",tips:"唐代古刹，寺内有宋代铭文砖；殿宇不大，与文庙仅一墙之隔，顺路游览即可。",tags:["free","outdoor","rain"]},
+ {id:"wenmiao",name:"赣州文庙",img:"",lat:25.8610,lng:114.9380,area:"core",cat:"历史",ticket:"免费",open:"8:30-17:00（周一闭馆）",dur:"1小时",best:"工作日上午",park:"厚德路小学周边有少量车位",tips:"江西现存规模最大文庙，大成殿脊饰精美；大成门石阶是经典机位；周一闭馆勿跑空。",tags:["free","outdoor","rain"]},
+ {id:"fushougou",name:"福寿沟博物馆",img:"",lat:25.8600,lng:114.9360,area:"core",cat:"历史",ticket:"免费",open:"9:00-17:00（周一闭馆）",dur:"1小时",best:"雨天也适合（室内）",park:"同老城区",tips:"北宋刘彝修建的千年地下排水系统，赣州古城'不涝'的秘密；馆内模型+实物展示，被严重低估的宝藏博物馆。",tags:["free","indoor","rain"]},
+ {id:"zaoerxiang",name:"灶儿巷",img:"",lat:25.8603,lng:114.9372,area:"core",cat:"历史",ticket:"免费",open:"全天开放",dur:"1-1.5小时",best:"下午 4 点后光线斜射最美",park:"巷口小停车场",tips:"明清古街巷，保留钱庄/衙署旧宅；董府菜馆就在巷内，逛完正好吃饭；商业开发轻，很有生活气。",tags:["free","outdoor"]},
+ {id:"gufuqiao",name:"建春门古浮桥",img:"",lat:25.8580,lng:114.9405,area:"core",cat:"历史",ticket:"免费",open:"全天开放",dur:"1小时",best:"17:00-19:00 渔船归岸+落日",park:"建春门城楼旁有停车场",tips:"始建于宋代的贡江浮桥，100多只小舟连缀；傍晚渔民卖鱼干最有烟火气；木板有缝隙，穿平底鞋。",tags:["free","outdoor","night"]},
+ {id:"biaozhunzhong",name:"标准钟楼",img:"",lat:25.8555,lng:114.9390,area:"core",cat:"历史",ticket:"免费",open:"全天（外观）",dur:"20分钟",best:"夜景亮灯后",park:"南门广场地下停车场",tips:"民国地标，赣州'老表'心中的城市原点；周边是商圈，适合夜晚顺路打卡，不必专程前往。",tags:["free","outdoor","night"]},
+ {id:"bajingtai",name:"古城墙·八境台",img:"",lat:25.8635,lng:114.9440,area:"core",cat:"历史",ticket:"城墙免费；八境台登台 ¥20",open:"8:00-18:00",dur:"1.5小时",best:"8:00 开门即入，承包 empty 城墙",park:"八境台公园停车场",tips:"全国现存唯一宋代砖城墙，章贡两江交汇处登台可览'八境'全景；只走城墙段免费，登台才收费。",tags:["paid","outdoor","night"]},
+ {id:"yugutai",name:"郁孤台",img:"",lat:25.8675,lng:114.9355,area:"core",cat:"历史",ticket:"免费",open:"8:30-17:30",dur:"1小时",best:"傍晚登临看两江汇流",park:"郁孤台停车场",tips:"辛弃疾'郁孤台下清江水'所在；贺兰山顶视野极佳；山不高，5 分钟登顶，老人小孩友好。",tags:["free","outdoor","night"]},
+ {id:"jiangjingguo",name:"蒋经国旧居",img:"",lat:25.8670,lng:114.9350,area:"core",cat:"历史",ticket:"免费（凭身份证）",open:"8:30-17:00（周一闭馆）",dur:"50分钟",best:"与郁孤台连游",park:"同郁孤台",tips:"蒋经国主政赣南时期住所，俄式风格小楼，院内有一批历史照片；就在郁孤台旁 100 米，务必一起看。",tags:["free","indoor","rain"]},
+ {id:"buchengcheng",name:"宋潮不夜城",img:"",lat:25.8660,lng:114.9370,area:"core",cat:"夜景",ticket:"街区免费；演出票 ¥68 起",open:"街区全天；亮灯 18:30-23:00",dur:"2-3小时",best:"周五六晚有完整演出",park:"军门楼地下停车场",tips:"沉浸式宋风街区，军门楼、四贤坊都是复原建筑；免费区氛围已足够，演出票按需购买；晚饭可在此解决。",tags:["free","outdoor","night"]},
+ {id:"bowuguan",name:"赣州市博物馆",img:"",lat:25.8230,lng:114.9460,area:"far",cat:"亲子",ticket:"免费（需预约）",open:"9:00-17:00（周一闭馆）",dur:"2小时",best:"下雨天首选",park:"馆区自有停车场免费",tips:"新馆在章江新区城市中央公园旁，'客家摇篮'基本陈列质量很高；需在官方公众号预约；与老城建族群隔江，建议放返程日上午。",tags:["free","indoor","rain"]}
+];
+
+const FOODS = [
+ {id:"dongfu",name:"董府",cat:"正餐 特色",img:"",lat:25.8603,lng:114.9373,pp:"¥60-80",open:"11:00-14:00 / 17:00-20:30",sig:"赣南小炒鱼、客家酿豆腐、三杯鸡",spicy:"微辣-中辣",queue:"节假日 12 点起排队",book:"包间可电话预约",near:"灶儿巷（同街）·魏家大院 300m",old:"✅ 收录 10 年老店"},
+ {id:"kejiadayuan",name:"客家大院（章贡店）",cat:"正餐 特色",img:"",lat:25.8560,lng:114.9350,pp:"¥70-100",open:"11:00-14:00 / 16:30-21:00",sig:"客家盐焗鸡、梅菜扣肉、鱼脯汤",spicy:"不辣-微辣",queue:"周末晚餐高峰",book:"支持",near:"标准钟 500m·渔湾里 800m",old:"✅ 本地连锁口碑店"},
+ {id:"amuyuan",name:"阿姆源（南门口店）",cat:"正餐 特色",img:"",lat:25.8558,lng:114.9385,pp:"¥50-70",open:"11:00-21:00（无休）",sig:"客家艾糍、芋头蒸排骨、土猪汤",spicy:"不辣为主",queue:"基本不排队",book:"无需",near:"标准钟 200m·古浮桥 1km",old:"✅ 本地连锁"},
+ {id:"xiaocaishen",name:"小财神·老派赣州菜",cat:"正餐",img:"",lat:25.8620,lng:114.9420,pp:"¥65-90",open:"11:00-14:00 / 17:00-21:00",sig:"赣南醋果子炒大肠、板鸭",spicy:"中辣",queue:"饭点等位 20 分钟内",book:"支持线上取号",near:"八境台 700m·古浮桥 500m",old:"✅ 本地老牌"},
+ {id:"yuwanli",name:"渔湾里美食街",cat:"小吃 特色",img:"",lat:25.8545,lng:114.9345,pp:"¥20-40",open:"16:00-凌晨 2:00",sig:"赣州鱼饼、擂茶、炸米果、嗦粉",spicy:"自选",queue:"21 点后最热闹",book:"无需",near:"标准钟 800m",old:"✅ 本地人夜宵据点"},
+ {id:"diaoyutai",name:"钓鱼台小吃街",cat:"小吃",img:"",lat:25.8612,lng:114.9378,pp:"¥15-35",open:"10:00-23:00",sig:"信丰萝卜饺、安远三鲜粉",spicy:"微辣",queue:"傍晚人多",book:"无需",near:"灶儿巷 200m·文庙 300m",old:"✅ 老城小吃聚集地"},
+ {id:"ningdou",name:"宁都味道（客家菜馆）",cat:"早餐 正餐 特色",img:"",lat:25.8535,lng:114.9395,pp:"¥30-60",open:"6:30-10:00 / 11:00-14:00",sig:"宁都肉丸、肉撮、拌粉",spicy:"微辣",queue:"早 7-8 点满座",book:"无需",near:"标准钟 600m",old:"✅ 宁都籍老板老店"},
+ {id:"songchengfood",name:"宋潮不夜城美食市集",cat:"小吃 特色",img:"",lat:25.8660,lng:114.9372,pp:"¥25-50",open:"17:00-23:00",sig:"宋代主题小吃、客家茶点",spicy:"自选",queue:"周末 19 点后",book:"无需",near:"宋潮不夜城街区内·郁孤台 200m",old:"⚠️ 景区店，胜在氛围"}
+];
+
+const HOTELS = [
+ {id:"jinjiang",name:"赣州锦江国际酒店",img:"",lat:25.8260,lng:114.9480,tier:"品质",price:"¥420-580",room:"江景大床/双床 45㎡",bf:"含双早",park:"免费停车",pros:"章江新区江景、泳池、行政酒廊",cons:"距老城景点 5km 需打车",loc:"章江新区·近市博物馆",score:"4.7 · 服务好评率高"},
+ {id:"ganzhoubinguan",name:"赣州宾馆",img:"",lat:25.8520,lng:114.9360,tier:"舒适",price:"¥260-380",room:"园林式庭院房",bf:"含早",park:"院内免费",pros:"老城区中心、闹中取静、老字号国营服务稳",cons:"设施略旧",loc:"老城区·步行至标准钟 10 分钟",score:"4.5 · 位置绝佳"},
+ {id:"walter",name:"沃尔顿国际酒店（章贡店）",img:"",lat:25.8330,lng:114.9440,tier:"舒适",price:"¥280-400",room:"智能客控房",bf:"含早",park:"免费",pros:"本地高端连锁、性价比高、早餐丰盛",cons:"距老城 3km",loc:"章江新区",score:"4.6 · 本地人婚宴首选"},
+ {id:"weiyena",name:"维也纳国际酒店（南门口店）",img:"",lat:25.8560,lng:114.9398,tier:"经济",price:"¥180-260",room:"豪华大床 30㎡",bf:"部分含早",park:"周边收费停车场",pros:"性价比之王、楼下即商圈、夜宵方便",cons:"楼层高电梯慢",loc:"南门口·古浮桥步行 15 分钟",score:"4.4 · 干净卫生"},
+ {id:"atour",name:"亚朵酒店（万象城店）",img:"",lat:25.8190,lng:114.9500,tier:"舒适",price:"¥300-420",room:"几木大床 35㎡",bf:"含早",park:"免费",pros:"床品公认舒服、深夜粥道服务",cons:"到老城景点打车 15 分钟",loc:"章江新区·万象城商圈",score:"4.8 · 睡眠体验好评"},
+ {id:"minsu",name:"郁孤台历史文化街区庭院民宿",img:"",lat:25.8668,lng:114.9358,tier:"民宿",price:"¥350-600",room:"宋式庭院大床房",bf:"部分含早",park:"街区周边公共停车",pros:"出门即景点、汉服拍照零距离、夜景观景位",cons:"木质结构隔音一般、旺季紧俏",loc:"郁孤台脚下·核心中的核心",score:"4.6 · 氛围感拉满"}
+];
+
+const HANFU = [
+ {id:"hf1",name:"路线① 宋城夜景汉服线",len:"全程约 1.2km · 步行 25 分钟",best:"18:40-19:20 蓝调时刻",spots:[["军门楼","宋潮不夜城正门，全景仰拍"],["四贤坊","牌坊+灯笼纵深构图"],["宋街河道","小桥流水倒影机位"]],tips:"夜景灯笼全开时人流最多，机位先到先得；蓝调时刻只有约 40 分钟，先拍大场景再拍人像。"},
+ {id:"hf2",name:"路线② 古城墙·八境台古风线",len:"全程约 2km · 步行 40 分钟",best:"8:00-9:30 晨光斜照城墙",spots:[["八境台登台口","台阶仰拍+飞檐"],["城墙马面","青砖延伸感大片"],["章贡合流观景台","凭栏望江背影"]],tips:"8 点开门即入可拍'空城'效果；10 点后旅行团涌入；城墙无遮阴，夏天 9 点后就很晒。"},
+ {id:"hf3",name:"路线③ 郁孤台·灶儿巷穿越线",len:"全程约 1.5km · 步行 35 分钟",best:"16:00-17:30 夕照古巷",spots:[["郁孤台山门","石阶+辛弃疾词碑"],["田螺岭老巷","烟火气生活场景"],["灶儿巷骑楼","青石板逆光人像"]],tips:"灶儿巷居民正常生活，拍摄请勿堵门喧哗；傍晚巷口老人下棋画面极有人文感，拍前微笑征得同意。"}
+];
+
+/* ============ 三天两夜默认行程（不回头设计） ============ */
+const DEFAULT_PLAN = [
+ {day:1,title:"Day 1 · 江北宋城人文线（下午抵达友好）",stops:["weijiadayuan","shouliang","wenmiao","fushougou","zaoerxiang","gufuqiao","biaozhunzhong"]},
+ {day:2,title:"Day 2 · 两江四岸城墙线",stops:["bajingtai","jiangjingguo","yugutai","buchengcheng"]},
+ {day:3,title:"Day 3 · 从容收尾线",stops:["bowuguan"]}
+];
+
+/* ============ 状态 ============ */
+const DB = {};  // id → 对象（含类型）
+SPOTS.forEach(s=>DB[s.id]={...s,type:"spot"});
+FOODS.forEach(s=>DB[s.id]={...s,type:"food"});
+HOTELS.forEach(s=>DB[s.id]={...s,type:"hotel"});
+HANFU.forEach(s=>DB[s.id]={...s,type:"hanfu"});
+
+let plan = JSON.parse(localStorage.getItem("gz_plan")||"null") || JSON.parse(JSON.stringify(DEFAULT_PLAN));
+let baseHotel = localStorage.getItem("gz_hotel")||"ganzhoubinguan";
+let favs = JSON.parse(localStorage.getItem("gz_fav")||"[]");
+let curDay = 0;
+let layers = {spot:true,hanfu:false,food:false,hotel:false};
+let AMapObj=null, mapObj=null, markers={}, routeLine=null;
+
+/* ============ 工具函数 ============ */
+const $ = s=>document.querySelector(s);
+const $$ = s=>[...document.querySelectorAll(s)];
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),2200)}
+function hav(a,b){const R=6371,x=(b.lat-a.lat)*Math.PI/180,y=(b.lng-a.lng)*Math.PI/180;
+  const h=Math.sin(x/2)**2+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(y/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h))}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function save(){localStorage.setItem("gz_plan",JSON.stringify(plan))}
+function imgBox(o,extra){
+  return `<div class="imgbox">${o.img?`<img src="${o.img}" alt="${esc(o.name)}" loading="lazy" onerror="this.remove()">`:""}
+    <div class="ph">${esc(o.name)}<small>${extra||"实拍图待配置"}</small></div>
+    <button class="fav-btn ${favs.includes(o.id)?"on":""}" onclick="toggleFav('${o.id}',event)">${favs.includes(o.id)?"♥":"♡"}</button></div>`;
+}
+function toggleFav(id,e){e&&e.stopPropagation();
+  favs = favs.includes(id)?favs.filter(x=>x!==id):[...favs,id];
+  localStorage.setItem("gz_fav",JSON.stringify(favs));
+  renderFavs();renderSpots();renderFoods();renderHotels();
+  toast(favs.includes(id)?"已收藏 ♥":"已取消收藏");}
+function renderFavs(){
+  const box=$("#favList");
+  $("#favCount").textContent = favs.length?`(${favs.length})`:"";
+  if(!favs.length){box.innerHTML='<div class="notice">还没有收藏。在景点/美食/酒店卡片右上角点 ♡ 即可收藏。</div>';return}
+  box.innerHTML = favs.map(id=>{const o=DB[id];if(!o)return"";
+    return `<div class="card"><div class="body" style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px">
+      <div><strong>${esc(o.name)}</strong><div class="meta">${o.type==="spot"?"🏛️ 景点":o.type==="food"?"🍜 美食":o.type==="hotel"?"🏨 酒店":"🎎 汉服"}</div></div>
+      <div style="display:flex;gap:6px">
+        <button class="mini-btn primary" onclick="locate('${id}')">定位</button>
+        <button class="mini-btn" onclick="toggleFav('${id}')">删</button></div></div></div>`}).join("");
+}
+function locate(id){const o=DB[id];if(!o)return;
+  showPanel(currentPanel);
+  if(mapObj&&AMapObj){mapObj.setZoomAndCenter(16,[o.lng,o.lat]);toggleFullscreen(true);
+    if(markers[id])markers[id].setAnimation("AMAP_ANIMATION_BOUNCE")}
+  else toast("配置地图 Key 后可定位："+o.name);}
+</script>
+
+<script>
+/* ============ 时间轴 & 行程 ============ */
+function renderDayTabs(){
+  $("#dayTabs").innerHTML = plan.map((d,i)=>`<button class="day-tab ${i===curDay?"on":""}" onclick="switchDay(${i})">第 ${i+1} 天</button>`).join("");
+}
+function switchDay(i){curDay=i;renderDayTabs();renderTimeline()}
+function renderTimeline(){
+  const day = plan[curDay]; if(!day){$("#timeline").innerHTML="";return}
+  let totalKm=0, html="";
+  // 起点：酒店
+  const hotel = DB[baseHotel];
+  html += `<div class="tl-item" style="opacity:.85"><div class="tm">START · 出发点</div><h4>🏨 ${esc(hotel.name)}</h4>
+    <div class="tr">${hav(hotel,DB[day.stops[0]]).toFixed(1)}km · 打车约 ${Math.round(hav(hotel,DB[day.stops[0]])/25*60+4)} 分钟</div></div>`;
+  let prev = hotel;
+  day.stops.forEach((sid,i)=>{
+    const o=DB[sid]; const km=hav(prev,o); totalKm+=km;
+    const w=Math.round(km/4.5*60), d=Math.round(km/25*60+3), b=Math.round(km/17*60+9);
+    html += `<div class="tl-item" onclick="locate('${sid}')">
+      <div class="tm">${String(9+i*1.5).split(".")[0].padStart(2,"0")}:${i%2?"30":"00"} 前后</div>
+      <h4>${i+1}. ${esc(o.name)} <span class="meta">${o.ticket?"· "+esc(o.ticket):""}</span></h4>
+      ${o.dur?`<div class="meta">建议游玩 ${o.dur}${o.best?" · 最佳："+esc(o.best):""}</div>`:""}
+      <div class="tr">↳ 上一站距离 ${km.toFixed(1)}km ｜ 🚶${w||3}分 ｜ 🚕${d||5}分 ｜ 🚌${b||12}分</div>
+      <div class="ops no-print" onclick="event.stopPropagation()">
+        <button class="mini-btn" ${i===0?"disabled style='opacity:.4'":""} onclick="moveStop(${i},-1)">↑ 上移</button>
+        <button class="mini-btn" ${i===day.stops.length-1?"disabled style='opacity:.4'":""} onclick="moveStop(${i},1)">↓ 下移</button>
+        <button class="mini-btn dark" onclick="navTo('${sid}')">导航→</button>
+      </div></div>`;
+    prev=o;
+  });
+  $("#timeline").innerHTML = html;
+  $("#daySum").innerHTML = `<span>📏 本日总里程约 <strong>${totalKm.toFixed(1)} km</strong></span><span>⏱ 纯移动约 <strong>${Math.round(totalKm/20*60)} 分钟</strong></span>`;
+  drawRoute();
+}
+function moveStop(i,dir){
+  const s=plan[curDay].stops; const j=i+dir; if(j<0||j>=s.length)return;
+  [s[i],s[j]]=[s[j],s[i]]; save(); renderTimeline(); toast("已调整顺序，记得点「智能重排」优化路线");
+}
+function reorderDay(){
+  const s=plan[curDay].stops;
+  // 起点酒店最近邻贪心
+  const rest=[...s]; const out=[]; let cur=DB[baseHotel];
+  while(rest.length){let bi=0,bd=1e9;rest.forEach((id,i)=>{const d=hav(cur,DB[id]);if(d<bd){bd=d;bi=i}});out.push(rest.splice(bi,1)[0]);cur=DB[out[out.length-1]]}
+  plan[curDay].stops=out; save(); renderTimeline(); toast("已按无折返原则重排 ✓");
+}
+function navTo(id){const o=DB[id];
+  window.open(`https://uri.amap.com/marker?position=${o.lng},${o.lat}&name=${encodeURIComponent(o.name)}`,"_blank")}
+function exportNavLinks(){
+  const links = plan[curDay].stops.map((sid,i)=>{const o=DB[sid];return `${i+1}. ${o.name}\nhttps://uri.amap.com/marker?position=${o.lng},${o.lat}&name=${encodeURIComponent(o.name)}`}).join("\n\n");
+  download("第"+(curDay+1)+"天导航链接.txt",links);
+}
+/* 智能生成：按酒店聚类 + 天数切分 */
+function generatePlan(){
+  const days=+$("#pDays").value, budget=+$("#pBudget").value;
+  const favsSel=$$("#pFavs .chip.on").map(c=>c.dataset.v);
+  // 候选池：优先兴趣标签
+  let pool = SPOTS.filter(s=>true).map(s=>s.id);
+  if(favsSel.includes("夜景")) {/* 保持默认，夜景天然在后 */}
+  // 按距酒店聚类排序（最近邻全串）
+  const rest=[...pool]; const ordered=[]; let cur=DB[baseHotel];
+  while(rest.length){let bi=0,bd=1e9;rest.forEach((id,i)=>{const d=hav(cur,DB[id]);if(d<bd){bd=d;bi=i}});ordered.push(rest.splice(bi,1)[0]);cur=DB[ordered[ordered.length-1]]}
+  // 切分天数：尽量均衡
+  plan=[]; const n=ordered.length;
+  for(let d=0;d<days;d++){plan.push({day:d+1,title:`Day ${d+1} · 智能规划`,stops:ordered.slice(Math.round(d*n/days),Math.round((d+1)*n/days))})}
+  plan=plan.filter(d=>d.stops.length);
+  // 预算校验提示
+  const hotelP={经济:200,舒适:320,品质:480,民宿:420}[DB[baseHotel].tier]||300;
+  const est=hotelP*( (+$("#pDays").value)-1 ) + (+$("#bFood").value)*days + (+$("#bTicket").value) + (+$("#bTrans").value)*days;
+  save(); curDay=0; renderDayTabs(); renderTimeline();
+  toast(est>budget?`已生成！预估 ¥${est} 略超预算，建议换经济型酒店`:`已生成 ${plan.length} 天无回头路线 ✓`);
+  showPanel("plan");
+}
+
+/* ============ 景点卡片 ============ */
+let spotFilter="all";
+function renderSpots(){
+  const map={free:s=>s.tags.includes("free"),paid:s=>s.ticket.includes("¥")||s.tags.includes("paid"),
+    indoor:s=>s.tags.includes("indoor"),night:s=>s.tags.includes("night"),rain:s=>s.tags.includes("rain"),
+    core:s=>s.area==="core",far:s=>s.area==="far"};
+  const list=SPOTS.filter(s=>spotFilter==="all"||map[spotFilter](s));
+  $("#spotCount").textContent=`(${list.length}/${SPOTS.length})`;
+  $("#spotList").innerHTML=list.map(s=>`<div class="card">${imgBox(s,"🏛️ 实拍图")}
+   <div class="body"><h3>${esc(s.name)} <small class="meta">${s.area==="core"?"· 市区核心":"· 周边"}</small></h3>
+    <div class="row">
+      <span class="tag ${s.tags.includes("free")?"green":"red"}">${esc(s.ticket)}</span>
+      ${s.tags.map(t=>`<span class="tag">${{free:"免费",indoor:"室内",outdoor:"室外",night:"夜游",rain:"雨天备选"}[t]||t}</span>`).join("")}
+    </div>
+    <div class="meta">🕐 ${esc(s.open)} ｜ ⏳ ${esc(s.dur)}</div>
+    <div class="meta">🌅 最佳时段：${esc(s.best)}</div>
+    <div class="meta">🅿️ ${esc(s.park)}</div>
+    <div class="notice" style="margin:8px 0 0">💡 ${esc(s.tips)}</div>
+    <div class="ops" style="display:flex;gap:6px;margin-top:10px">
+      <button class="mini-btn primary" onclick="locate('${s.id}')">📍 地图定位</button>
+      <button class="mini-btn dark" onclick="navTo('${s.id}')">一键导航</button>
+    </div></div></div>`).join("");
+}
+$$("#spotFilters .chip").forEach(c=>c.onclick=()=>{$$("#spotFilters .chip").forEach(x=>x.classList.remove("on"));c.classList.add("on");spotFilter=c.dataset.f;renderSpots()});
+
+/* ============ 汉服 ============ */
+function renderHanfu(){
+  $("#hanfuList").innerHTML=HANFU.map(h=>`<div class="card">${imgBox(h,"🎎 机位实拍待配置")}
+   <div class="body"><h3>${esc(h.name)}</h3>
+    <div class="row"><span class="tag gold">📏 ${esc(h.len)}</span><span class="tag red">🌅 ${esc(h.best)}</span></div>
+    ${h.spots.map((p,i)=>`<div class="kv"><span>${i+1}. ${esc(p[0])}</span><span style="text-align:right;max-width:55%">${esc(p[1])}</span></div>`).join("")}
+    <div class="notice" style="margin:8px 0 0">📸 ${esc(h.tips)}</div>
+    <button class="mini-btn primary" style="margin-top:10px" onclick="showHanfuRoute('${h.id}')">在地图上显示此路线</button>
+   </div></div>`).join("");
+}
+let hanfuLine=null;
+function showHanfuRoute(hid){
+  const h=DB[hid];
+  if(!mapObj){toast("配置地图 Key 后显示路线");showPanel("tools");return}
+  if(hanfuLine){hanfuLine.setMap(null)}
+  // 按路线名称关联核心景点
+  const ids=hid==="hf1"?["buchengcheng","zaoerxiang"]:hid==="hf2"?["bajingtai","yugutai"]:["yugutai","zaoerxiang"];
+  const path=ids.map(id=>new AMapObj.LngLat(DB[id].lng,DB[id].lat));
+  hanfuLine=new AMapObj.Polyline({path,strokeColor:"#b08d57",strokeWeight:5,strokeStyle:"dashed",showDir:true});
+  hanfuLine.setMap(mapObj); mapObj.setFitView([hanfuLine]);
+  toast("已显示「"+h.name+"」示意路线");
+}
+
+/* ============ 美食 ============ */
+let foodFilter="all";
+function renderFoods(){
+  const list=FOODS.filter(f=>foodFilter==="all"||f.cat.includes(foodFilter));
+  $("#foodList").innerHTML=list.map(f=>`<div class="card">${imgBox(f,"🍜 店内实拍待配置")}
+   <div class="body"><h3>${esc(f.name)}</h3>
+    <div class="row"><span class="tag red">人均 ${esc(f.pp)}</span>${f.cat.split(" ").map(c=>`<span class="tag gold">${c}</span>`).join("")}<span class="tag ${f.old.includes("✅")?"green":""}">${esc(f.old)}</span></div>
+    <div class="meta">🕐 ${esc(f.open)}</div>
+    <div class="meta">🥢 招牌：${esc(f.sig)}</div>
+    <div class="meta">🌶️ 辣度：${esc(f.spicy)} ｜ ⏰ 排队高峰：${esc(f.queue)}</div>
+    <div class="meta">📞 预约：${esc(f.book)}</div>
+    <div class="meta">🧭 周边：${esc(f.near)}</div>
+    <div class="ops" style="display:flex;gap:6px;margin-top:10px">
+      <button class="mini-btn primary" onclick="locate('${f.id}')">📍 定位</button>
+      <button class="mini-btn dark" onclick="navTo('${f.id}')">去这里吃</button></div>
+   </div></div>`).join("");
+}
+$$("#foodFilters .chip").forEach(c=>c.onclick=()=>{$$("#foodFilters .chip").forEach(x=>x.classList.remove("on"));c.classList.add("on");foodFilter=c.dataset.f;renderFoods()});
+
+/* ============ 酒店 ============ */
+let hotelFilter="all";
+function renderHotels(){
+  const list=HOTELS.filter(h=>{if(hotelFilter==="all")return true;
+    if(hotelFilter==="早")return h.bf.includes("含"); if(hotelFilter==="停")return h.park.includes("免");
+    return h.tier===hotelFilter});
+  $("#hotelCount").textContent=`(${list.length}/${HOTELS.length}) · 当前起点：${DB[baseHotel].name}`;
+  $("#hotelList").innerHTML=list.map(h=>`<div class="card" style="${h.id===baseHotel?"border:2px solid var(--brick)":""}">${imgBox(h,"🏨 实拍待配置")}
+   <div class="body"><h3>${esc(h.name)} ${h.id===baseHotel?'<span class="tag red">✓ 行程起点</span>':""}</h3>
+    <div class="row"><span class="tag red">${esc(h.price)}</span><span class="tag gold">${h.tier}</span><span class="tag">${esc(h.room)}</span></div>
+    <div class="meta">⭐ ${esc(h.score)}</div>
+    <div class="meta">🍳 ${esc(h.bf)} ｜ 🅿️ ${esc(h.park)}</div>
+    <div class="meta">👍 ${esc(h.pros)}</div>
+    <div class="meta">👎 ${esc(h.cons)}</div>
+    <div class="meta">📍 ${esc(h.loc)}</div>
+    <div class="ops" style="display:flex;gap:6px;margin-top:10px">
+      <button class="mini-btn primary" onclick="setBaseHotel('${h.id}')">${h.id===baseHotel?"当前起点":"设为行程起点"}</button>
+      <button class="mini-btn dark" onclick="navTo('${h.id}')">导航</button></div>
+   </div></div>`).join("");
+}
+$$("#hotelFilters .chip").forEach(c=>c.onclick=()=>{$$("#hotelFilters .chip").forEach(x=>x.classList.remove("on"));c.classList.add("on");hotelFilter=c.dataset.f;renderHotels()});
+function setBaseHotel(id){baseHotel=id;localStorage.setItem("gz_hotel",id);
+  renderHotels();renderTimeline();toast("已切换行程起点："+DB[id].name+"，路线已重算");}
+</script>
+
+<script>
+/* ============ 高德地图加载 & 图层 ============ */
+function initMapFallback(reason){
+  const el=$("#map");
+  el.innerHTML=`<div class="map-fallback"><h3>🗺️ 简版点位图（离线模式${reason?"· "+reason:""}）</h3>
+    <p style="font-size:12.5px;color:var(--ink2);margin-bottom:10px">配置高德 Key 后自动点亮交互地图。点位按真实经纬度排序：</p>
+    <ol>${SPOTS.map(s=>`<li style="margin-bottom:6px"><strong>${esc(s.name)}</strong><br><span style="font-size:12px">${s.lat.toFixed(4)}, ${s.lng.toFixed(4)} · ${esc(s.ticket)}</span></li>`).join("")}</ol></div>`;
+}
+function loadMap(){
+  if(!CONFIG.AMAP_KEY){$("#keyBanner").style.display="block";initMapFallback();return}
+  try{
+    window._AMapSecurityConfig={securityJsCode:CONFIG.AMAP_SECURITY_CODE};
+    const s=document.createElement("script");
+    s.src=`https://webapi.amap.com/maps?v=2.0&key=${CONFIG.AMAP_KEY}&plugin=AMap.Geolocation`;
+    s.onerror=()=>initMapFallback("Key 校验失败");
+    s.onload=()=>{
+      AMapObj=AMap;
+      mapObj=new AMap.Map("map",{zoom:14,center:CONFIG.CITY,viewMode:"2D"});
+      mapObj.on("complete",()=>{buildLayers();drawRoute();$("#map").style.background="#fff"});
+      setTimeout(()=>{if(!mapObj.getLayers) initMapFallback()},6000);
+    };
+    document.head.appendChild(s);
+  }catch(e){initMapFallback()}
+}
+function buildLayers(){
+  // 清除旧标记
+  Object.values(markers).forEach(m=>m.setMap(null)); markers={};
+  const add=(o,color,label)=>{
+    const m=new AMapObj.Marker({position:[o.lng,o.lat],title:o.name,
+      label:{content:label||o.name,direction:"bottom",offset:new AMapObj.Pixel(0,4)}});
+    m.setLabel({content:o.name,direction:"bottom"});
+    m.setMap(mapObj);
+    m.on("click",()=>openDetail(o.id));
+    markers[o.id]=m;
+  };
+  if(layers.spot)SPOTS.forEach(s=>add(s,"#a5492f"));
+  if(layers.food)FOODS.forEach(f=>add(f,"#3f6f4a"));
+  if(layers.hotel)HOTELS.forEach(h=>add(h,"#4a5f8a"));
+  if(layers.hanfu)HANFU.forEach(h=>add(h,"#b08d57","📷 "+h.name));
+}
+function drawRoute(){
+  if(!mapObj||!AMapObj)return;
+  if(routeLine){routeLine.setMap(null)}
+  const day=plan[curDay]; if(!day)return;
+  const hotel=DB[baseHotel];
+  const path=[new AMapObj.LngLat(hotel.lng,hotel.lat),
+    ...day.stops.map(id=>new AMapObj.LngLat(DB[id].lng,DB[id].lat))];
+  routeLine=new AMapObj.Polyline({path,strokeColor:"#a5492f",strokeWeight:6,showDir:true,lineJoin:"round"});
+  routeLine.setMap(mapObj);
+  mapObj.setFitView([routeLine],false,[60,60,60,60]);
+}
+$$(".layer-chip").forEach(c=>c.onclick=()=>{
+  const l=c.dataset.layer; layers[l]=!layers[l]; c.classList.toggle("on",layers[l]);
+  if(mapObj){buildLayers();toast(c.textContent.trim()+"图层已"+(layers[l]?"开启":"关闭"))}
+  else toast("配置地图 Key 后图层生效");
+});
+function toggleFullscreen(force){
+  const w=$("#mapWrap"); const on=force===true?true:!w.classList.contains("fullscreen");
+  w.classList.toggle("fullscreen",on);
+  $("#expandMap").textContent=on?"✕ 退出全屏":"⛶ 全屏地图";
+  if(mapObj)setTimeout(()=>mapObj.resize(),80);
+}
+/* 时间轴 ↔ 地图 双向联动：点地图 marker 弹出详情 */
+function openDetail(id){
+  const o=DB[id]; if(!o)return;
+  const body={
+    spot:`<h3>${esc(o.name)}</h3><p class="meta">🎫 ${esc(o.ticket)} ｜ 🕐 ${esc(o.open)}</p><p class="meta">💡 ${esc(o.tips)}</p>
+      <button class="big-btn brick" onclick="navTo('${id}');closeModal()">一键导航到这儿</button>
+      <button class="big-btn ghost" onclick="addToToday('${id}');closeModal()">＋ 加入今天行程</button>`,
+    food:`<h3>${esc(o.name)}</h3><p class="meta">人均 ${esc(o.pp)} ｜ ${esc(o.open)}</p><p class="meta">🥢 ${esc(o.sig)}</p>
+      <button class="big-btn brick" onclick="navTo('${id}');closeModal()">去这里吃</button>`,
+    hotel:`<h3>${esc(o.name)}</h3><p class="meta">${esc(o.price)} ｜ ${esc(o.score)}</p><p class="meta">${esc(o.pros)}</p>
+      <button class="big-btn brick" onclick="setBaseHotel('${id}');closeModal()">设为行程起点</button>`,
+    hanfu:`<h3>${esc(o.name)}</h3><p class="meta">📏 ${esc(o.len)} ｜ 🌅 ${esc(o.best)}</p><p class="meta">${esc(o.tips)}</p>`
+  }[o.type];
+  openModal(body);
+}
+function addToToday(id){
+  plan[curDay].stops.push(id); save(); renderTimeline(); toast("已加入第"+(curDay+1)+"天行程末尾");
+}
+function openModal(html){$("#modalBody").innerHTML=html;$("#modalMask").classList.add("show")}
+function closeModal(){$("#modalMask").classList.remove("show")}
+function showFavModal(){openModal("<h3>⭐ 我的收藏</h3>"+$("#favList").innerHTML)}
+
+/* ============ 天气（Open-Meteo 免Key） ============ */
+async function loadWeather(){
+  const box=$("#weatherBox .body"); box.textContent="加载中…";
+  try{
+    const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=25.83&longitude=114.93&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=Asia%2FShanghai&forecast_days=4`);
+    const d=await r.json(); const wc={0:"☀️ 晴",1:"🌤 晴间多云",2:"⛅ 多云",3:"☁️ 阴",45:"🌫 雾",51:"🌦 毛毛雨",61:"🌧 小雨",63:"🌧 中雨",65:"🌧 大雨",80:"🌦 阵雨",95:"⛈ 雷阵雨"};
+    box.innerHTML=d.daily.time.map((t,i)=>`<div class="kv"><span>${t.slice(5).replace("-","/")} ${wc[d.daily.weathercode[i]]||"🌡"}</span>
+      <span>${Math.round(d.daily.temperature_2m_min[i])}° ~ ${Math.round(d.daily.temperature_2m_max[i])}° ｜ 🌧${d.daily.precipitation_probability_max[i]||0}%</span></div>`).join("");
+  }catch(e){box.textContent="网络不佳，稍后再试（Open-Meteo 免费接口）"}
+}
+
+/* ============ 预算计算器 ============ */
+function calcBudget(){
+  const days=+$("#pDays").value, ppl=$("#pPeople").value==="5+"?5:+$("#pPeople").value;
+  const h=+$("#bHotel").value,f=+$("#bFood").value,t=+$("#bTicket").value,tr=+$("#bTrans").value,o=+$("#bOther").value;
+  const total=(h*(days-1)+f*days+t+tr*days)*ppl+o*ppl;
+  const out=$("#budgetOut"); out.style.display="flex";
+  out.innerHTML=`<span>预估人均 <strong class="price">¥${Math.round(total/ppl)}</strong></span><span>整队约 <strong class="price">¥${Math.round(total)}</strong></span>`;
+  toast("预算计算完成");
+}
+
+/* ============ 导出 & 分享 ============ */
+function download(name,content){
+  const b=new Blob([content],{type:"text/plain;charset=utf-8"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;a.click();
+}
+function buildMD(){
+  const hotel=DB[baseHotel];
+  let md=`# 红烧肉的赣州旅游攻略（${plan.length}天${plan.length-1}夜）\n\n> 行程起点：${hotel.name}（${hotel.loc}）｜ 生成时间：${new Date().toLocaleString("zh-CN")}\n\n`;
+  plan.forEach((d,di)=>{
+    md+=`## ${d.title}\n\n`;
+    let prev=hotel,km=0;
+    d.stops.forEach((sid,i)=>{const o=DB[sid];km+=hav(prev,o);prev=o;
+      md+=`${i+1}. **${o.name}**（${o.ticket||""}）\n   - ${o.open||""} ｜ 建议 ${o.dur||""}\n   - 导航：https://uri.amap.com/marker?position=${o.lng},${o.lat}\n`});
+    md+=`\n📏 本日总里程约 ${km.toFixed(1)}km\n\n`;
+  });
+  md+=`## 🍜 本地人必吃\n\n`+FOODS.map(f=>`- **${f.name}**（人均${f.pp}）${f.sig}｜${f.open}｜周边：${f.near}`).join("\n")+"\n\n";
+  md+=`## 🏨 推荐酒店\n\n`+HOTELS.map(h=>`- **${h.name}**（${h.price}）${h.score}｜${h.loc}`).join("\n")+"\n\n";
+  md+=`## 🎎 汉服路线\n\n`+HANFU.map(h=>`- **${h.name}** ${h.len}｜${h.best}`).join("\n")+"\n";
+  md+=`\n---\n数据为整理时参考，出行前请以高德地图实时信息为准。\n`;
+  return md;
+}
+function exportMD(){download("赣州旅游攻略.md",buildMD());toast("攻略 Markdown 已导出")}
+function shareLink(){
+  const url=location.href.split("#")[0]+"#plan="+encodeURIComponent(JSON.stringify(plan))+"&hotel="+baseHotel;
+  history.replaceState(null,"","#plan="+encodeURIComponent(JSON.stringify(plan))+"&hotel="+baseHotel);
+  (navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(
+    ()=>toast("分享链接已复制，发给朋友即可"),
+    ()=>{prompt("长按复制分享链接：",url)});
+}
+
+/* ============ Tab 切换 ============ */
+let currentPanel="plan";
+function showPanel(p){
+  currentPanel=p;
+  $$(".panel").forEach(x=>x.classList.remove("on"));
+  const t=$("#panel-"+p); if(t)t.classList.add("on");
+  $$("#tabbar button").forEach(b=>b.classList.toggle("on",b.dataset.p===p));
+  if(window.innerWidth>=1024)$$("#leftCol .panel,#rightCol .panel").forEach(x=>x.classList.remove("on"));
+  if(window.innerWidth>=1024){
+    if(p==="params"){ /* 桌面端参数常驻 */ }
+    $("#panel-"+p).classList.add("on");
+    $("#panel-params").classList.add("on");
+  }
+  if(mapObj)setTimeout(()=>mapObj.resize(),100);
+}
+$$("#tabbar button").forEach(b=>b.onclick=()=>showPanel(b.dataset.p));
+
+/* ============ 笔记 ============ */
+function saveNotes(){localStorage.setItem("gz_notes",$("#myNotes").value);toast("笔记已保存到本机")}
+
+/* ============ 启动 ============ */
+(function init(){
+  $("#pDate").value=new Date().toISOString().slice(0,10);
+  $("#myNotes").value=localStorage.getItem("gz_notes")||"";
+  // URL 分享参数恢复
+  if(location.hash.includes("plan=")){
+    try{const h=new URLSearchParams(location.hash.slice(1));
+      if(h.get("plan"))plan=JSON.parse(decodeURIComponent(h.get("plan")));
+      if(h.get("hotel"))baseHotel=h.get("hotel");
+      toast("已载入分享的行程 ✓")}catch(e){}
+  }
+  renderDayTabs();renderTimeline();renderSpots();renderHanfu();renderFoods();renderHotels();renderFavs();
+  loadMap();
+  showPanel("plan");
+})();
+</script>
+</body>
+</html>
